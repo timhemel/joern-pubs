@@ -318,3 +318,16 @@ Answers to exercises
         c.
                 The code can be found in the file ``ast.groovy``.
 
+:doc:`cfg_traversals`
+
+1.
+
+        .. code-block:: groovy
+
+                getFunctionsByName('tut5')
+                .functionToStatements()
+                .map{ ['cfgnode': it.get(),
+                      'vars': inject(it.get()).definedVariables().dedup().toList()
+                ] }
+
+

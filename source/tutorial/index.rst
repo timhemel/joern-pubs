@@ -15,22 +15,9 @@ En passant, you will learn to write queries.
    answers
 
 
-Loading the code and making queries
-        importing code
-        using the joern shell
-        using Python
-        testing with joshi
-Gremlin graph concepts
-        nodes_properties_and_traversals.md
-        traversing_the_graph.md
-        vertex_steps_and_edges.md
-The Joern graph
-        files_and_functions.md
-        ast_traversals.md
-
-closures?
-adding steps
 testing & debugging
+
+adding edges and properties
 
 Node Reference
 Answers to exercises

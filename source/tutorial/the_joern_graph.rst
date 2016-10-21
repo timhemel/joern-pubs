@@ -7,14 +7,9 @@ The Joern Graph
    files_and_functions
    ast_traversals
    defining_custom_gremlin_traversals
-
-
-
-functions to CFG
-CFG traversals
-
-	-> repetitions (again): deal with cycles, simplePath
-	will simplePath still work if the lead-up traversal already contains a cycle?
+   cfg_traversals
+   more_sideeffects_using_sacks
+   dfg_traversals
 
 DFG traversals
 ud and du links
