@@ -330,4 +330,43 @@ Answers to exercises
                       'vars': inject(it.get()).definedVariables().dedup().toList()
                 ] }
 
+2.
+
+        .. code-block:: groovy
+
+                g.V()
+                .has(NODE_TYPE,TYPE_FUNCTION)
+                .has(NODE_CODE,'tut6')
+                .functionToCFG()             // gives the CFG entry node
+                .outE('FLOWS_TO')
+                .emit()
+                .repeat(
+                        aggregate('seen')
+                        .inV()
+                        .outE('FLOWS_TO')
+                        .where(P.without('seen'))
+                )
+
+:doc:`more_sideeffects_using_sacks`
+
+1.
+        A code path always ends in the CFG exit node. Therefore we need to add
+        an ``until`` step before the ``repeat``:
+
+        .. code-block:: groovy
+
+                g.withSack([:]){it.clone()}
+                .V()
+                .has(NODE_TYPE,TYPE_FUNCTION)
+                .has(NODE_CODE,'tut6')
+                .functionToCFG()             // gives the CFG entry node
+                .until{ it.get().value('type') == 'CFGExitNode' }
+                .repeat(
+                    filter{ it.sack.get(it.get().id(),0) < 3 }
+                    .sack{ m,v -> m[v.id()] = (m.get(v.id(),0)+1); m }
+                    .out(CFG_EDGE)
+                )
+                .path()
+                .by('code')  // make output more readable
+
 
