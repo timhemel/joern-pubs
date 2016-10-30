@@ -22,7 +22,11 @@ Joern CFG structure
 
 To get to the CFG of a function, follow the edge labeled ``IS_FUNCTION_OF_CFG``.
 
-The CFG edges have the label ``FLOWS_TO``. CFG nodes have the property ``isCFGNode`` set to ``'True'``. Even though every CFG node is also an AST node, a CFG is different from an AST in that it can have loops. This means that if we would try the same kind of loop that was used to traverse the AST, the traversal would continue looping until all the Octopus server's resources were exhausted. Since there is no way to kill a runaway traversal on the Octopus server other than restarting the server, we need to be very careful with our traversals.
+The CFG edges have the label ``FLOWS_TO``. A CFG node can have multiple outgoing CFG edges, usually going out of a ``Condition`` node. Joern does not label these edges, so there is no easy way to determine whether following the edge indicates whether the condition was true or false.
+
+*TODO: what is the edge property var used for?*
+
+CFG nodes have the property ``isCFGNode`` set to ``'True'``. Even though every CFG node is also an AST node, a CFG is different from an AST in that it can have loops. This means that if we would try the same kind of loop that was used to traverse the AST, the traversal would continue looping until all the Octopus server's resources were exhausted. Since there is no way to kill a runaway traversal on the Octopus server other than restarting the server, we need to be very careful with our traversals.
 
 Cycles and infinite loops
 --------------------------
@@ -211,4 +215,7 @@ Exercises
         Modify the ``map`` step so that we get the same result, i.e. for every
         CFG node we get a `Groovy Map <http://groovy-lang.org/groovy-dev-kit.html#Collections-Maps>`_ with keys ``cfgnode`` and ``vars``.
 
+2.
+
+        Write a traversal that outputs all CFG edges in a function.
 
